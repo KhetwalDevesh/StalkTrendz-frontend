@@ -1,0 +1,5 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="90" cy="90" r="89.5"
+ style="fill: var(--cursor-fill, #3F3B37); stroke: var(--cursor-stroke, #FBEFDF);"></circle><g><line class="arrow-body" x1="67.6464" y1="111.5" x2="111.5" y2="67.6464"
+  stroke-width="1.5" style="stroke: var(--cursor-stroke, #FBEFDF);"></line><line class="arrow-tail" x1="75" y1="67.5" x2="112" y2="67.5"
+ stroke-width="1.5" style="stroke: var(--cursor-stroke, #FBEFDF);"></line><line class="arrow-tail" x1="111.5" y1="105" x2="111.5" y2="68" 
+ stroke-width="1.5" style="stroke: var(--cursor-stroke, #FBEFDF);"></line></g></svg>
