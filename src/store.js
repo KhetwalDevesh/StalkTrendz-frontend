@@ -73,11 +73,8 @@ let useStore = (set, get) => ({
       return;
     }
     const itemsInCart = get().cartItems;
-    console.log(itemsInCart, "itemsInCart👍👍");
 
     const updatedCartItems = [...itemsInCart, newCartItem];
-    console.log(updatedCartItems, "updatedCartItems😒");
-    console.log(newCartItem, "newCartItem🙌");
     set({
       cartItems: updatedCartItems,
     });
@@ -110,12 +107,10 @@ let useStore = (set, get) => ({
     const updatedCart = get().cartItems.map((cartItem) => {
       if (cartItem._id !== itemId) return cartItem;
     });
-    console.log(updatedCart, "updatedCart");
     const updatedCartItems = updatedCart.filter((item) => {
       return item !== undefined;
     });
     set({ cartItems: updatedCartItems });
-    console.log(updatedCartItems, "😎");
   },
   decreaseQuantity: ({ item }) => {
     if (item.quantity === 1) {

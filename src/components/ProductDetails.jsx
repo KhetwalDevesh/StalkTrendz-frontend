@@ -10,6 +10,7 @@ import "../css/main.css";
 import useStore from "../store";
 import { Link } from "react-router-dom";
 import getParamFromURL from "../../utils/getParamFromURL";
+import toast, { Toaster } from "react-hot-toast";
 const ProductDetails = () => {
   const {
     cartItems,
@@ -30,7 +31,6 @@ const ProductDetails = () => {
   // get all the params of the URL
   const getParamsPartOfURL = () => {
     const currentURL = window.location.href;
-    console.log(currentURL);
     const urlParts = currentURL.split("/");
 
     let paramVar = "/";
@@ -38,29 +38,22 @@ const ProductDetails = () => {
       paramVar += `${urlParts[i]}/`;
     }
     setLastParamInURL({ param: paramVar });
-    console.log(paramVar);
-    console.log(lastParamInURL);
   };
 
   const addProductToCartLocal = () => {
     let promise = new Promise(function (resolve, reject) {
       addItemToCart({ item: productDetail });
     });
-    console.log("cartItems", JSON.stringify(cartItems, null, 2));
     let localTotalItemsInClientCart = 0;
     cartItems.map((item) => {
       localTotalItemsInClientCart += item.quantity;
     });
     setTotalItemsInCart({ allQuantity: localTotalItemsInClientCart });
-    console.log(
-      "localTotalItemsInClientCart",
-      JSON.stringify(localTotalItemsInClientCart, null, 2)
-    );
-    console.log("totalItemsInCart", JSON.stringify(totalItemsInCart, null, 2));
   };
 
   // add product to backend inside loggedIn user's cart
   const addProductToServerCart = async () => {
+    toast.success("Product added to cart");
     const response = await axios({
       method: "post",
       url: `${baseURL}/cart/`,
@@ -72,10 +65,6 @@ const ProductDetails = () => {
         Authorization: `Bearer ${user.token}`,
       },
     });
-    console.log(
-      "response.items.length",
-      JSON.stringify(response.data.items.length, null, 2)
-    );
     let totalCountOfItems = 0;
     response.data.items.map((item) => {
       totalCountOfItems += item.quantity;
@@ -84,16 +73,10 @@ const ProductDetails = () => {
     // console.log("response", JSON.stringify(response, null, 2));
   };
 
-  console.log("productDetail", JSON.stringify(productDetail, null, 2));
-
   useEffect(() => {
     const getProductDetails = async () => {
       try {
-        console.log(baseURL);
-        console.log(params.id);
-        console.log(`${baseURL} / ${params.id}`);
         const productData = await axios.get(`${baseURL}/products/${params.id}`);
-        console.log(productData.data.data);
         setProductDetail(productData.data.data);
       } catch (error) {
         console.log(error);
@@ -107,10 +90,10 @@ const ProductDetails = () => {
   }, []);
 
   // console.log(productDetail);
-  console.log(cartItems);
   if (productDetail === undefined) return <div>Loading...</div>;
   return (
     <div className="bg-[#fff1e5]">
+      <Toaster />
       <div className="mdlg:px-32 flex p-44 h-[100vh]">
         <img
           src={productDetail.image}
@@ -131,7 +114,7 @@ const ProductDetails = () => {
             onClick={
               loginStatus ? addProductToServerCart : addProductToCartLocal
             }
-            className="w-60 h-16 border-2  bg-black text-white text-lg rounded-full"
+            className="w-60 h-16 border-2  bg-black text-white text-lg rounded-full active:translate-y-2 hover:shadow-2xl"
           >
             Add to Cart
           </button>

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import useStore from "../store";
 import { baseURL } from "./Shop";
+import { toast, Toaster } from "react-hot-toast";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,23 +25,16 @@ const Login = () => {
     e.preventDefault();
     try {
       const data = { email, password };
-      console.log("data", JSON.stringify(data, null, 2));
       const loginResponse = await axios({
         method: "post",
         url: `${baseURL}/users/login`,
         data,
       });
-      console.log("loginResponse", JSON.stringify(loginResponse, null, 2));
       if (loginResponse.status === 200) {
         setLoginStatus({ currentStatus: true });
         setUser({ userData: loginResponse.data });
-
         const addedCartItems = await Promise.all(
           cartItems.map(async (clientCartItem) => {
-            console.log(
-              "clientCartItem",
-              JSON.stringify(clientCartItem, null, 2)
-            );
             localTotalItemsInServerCart += clientCartItem.quantity;
             const addClientCartToServerCartResponse = await axios({
               method: "post",
@@ -58,8 +52,6 @@ const Login = () => {
 
         clearClientCartItems();
         setTotalItemsInCart({ allQuantity: localTotalItemsInServerCart });
-        console.log("user", JSON.stringify(user, null, 2));
-
         navigate(lastParamInURL);
       }
     } catch (error) {
@@ -69,6 +61,7 @@ const Login = () => {
   console.log("lastParamInURL", JSON.stringify(lastParamInURL, null, 2));
   return (
     <div className=" pt-28 bg-[#fff1e5] flex justify-center items-center h-screen">
+      <Toaster />
       <div className="login-form bg-white border-2 border-black p-9 rounded-md">
         <form action="" onSubmit={(e) => handleSubmit(e)}>
           <div className="flex flex-col gap-2">

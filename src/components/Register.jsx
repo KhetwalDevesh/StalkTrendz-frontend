@@ -17,13 +17,11 @@ const Register = () => {
     e.preventDefault();
     try {
       const data = { username, email, password };
-      console.log("data", JSON.stringify(data, null, 2));
       const response = await axios({
         method: "post",
         url: `${baseURL}/users/register`,
         data,
       });
-      console.log(response);
       if (response.statusText === "Created") {
         navigate("/login");
       }
@@ -31,7 +29,6 @@ const Register = () => {
       console.log(error);
     }
   };
-  console.log("lastParamInURL", JSON.stringify(lastParamInURL, null, 2));
 
   return (
     <div className=" pt-28 bg-[#fff1e5] flex justify-center items-center h-screen  ">

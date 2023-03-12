@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import useStore from "../store";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { toast, Toaster } from "react-hot-toast";
 
 const Cart = () => {
   const {
@@ -24,18 +25,14 @@ const Cart = () => {
       subTotal += cartItem.quantity * cartItem.price;
     });
     setTotalItemsInCart({ allQuantity: localTotalItemsInClientCart });
-    console.log("subTotal", JSON.stringify(subTotal, null, 2));
     setUseSubTotal(subTotal);
   };
-  console.log("cartItems", JSON.stringify(cartItems, null, 2));
 
   const params = useParams();
-  console.log("params", JSON.stringify(params, null, 2));
 
   // get all the params of the URL
   const getParamsPartOfURL = () => {
     const currentURL = window.location.href;
-    console.log(currentURL);
     const urlParts = currentURL.split("/");
 
     let paramVar = "/";
@@ -44,8 +41,6 @@ const Cart = () => {
     }
     if (params.id) paramVar += params.id;
     setLastParamInURL({ param: paramVar });
-    console.log(paramVar);
-    console.log(lastParamInURL);
   };
 
   useEffect(() => {
@@ -55,6 +50,7 @@ const Cart = () => {
 
   return (
     <div className="bg-[#fff1e5] pt-20 min-h-screen ">
+      <Toaster />
       <div className="p-10 ">
         {cartItems.map((item) => {
           // console.log(cartItems);
@@ -126,7 +122,10 @@ const Cart = () => {
         })}
         <div className="m-auto p-7  flex flex-col gap-6 justify-center items-center text-4xl space-x-5">
           <span>Subtotal : ₹{useSubTotal}</span>
-          <button className="p-5 border-2 border-blue-500 bg-black text-2xl text-white rounded-full">
+          <button
+            onClick={() => toast.error("Login to buy the products")}
+            className="p-5 border-2 border-blue-500 bg-black text-2xl text-white rounded-full"
+          >
             Proceed to Checkout 🡆
           </button>
         </div>

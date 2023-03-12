@@ -10,7 +10,6 @@ const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 const Payment = () => {
   const location = useLocation();
   const orderDetails = location.state.orderResponse;
-  console.log("orderDetails", JSON.stringify(orderDetails, null, 2));
   const { clientSecret } = useStore();
   const options = {
     clientSecret,

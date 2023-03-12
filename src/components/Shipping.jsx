@@ -14,7 +14,6 @@ const Shipping = ({ cartItems }) => {
   const proceedToCheckout = async () => {
     try {
       const { address, mobile, city, pincode, state, country } = getValues();
-      console.log("pincode", JSON.stringify(pincode, null, 2));
       const orderItem = {
         orderItems: serverCartItems,
         user: {
@@ -35,7 +34,6 @@ const Shipping = ({ cartItems }) => {
       const response = await axios.post(`${baseURL}/orders`, {
         ...orderItem,
       });
-      console.log("response.data", JSON.stringify(response.data, null, 2));
       if (response.data.clientSecret) {
         addClientSecret(response.data.clientSecret);
         navigate("/payment", { state: { orderResponse: response.data } });

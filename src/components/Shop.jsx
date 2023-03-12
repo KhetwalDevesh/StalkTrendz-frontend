@@ -18,24 +18,18 @@ const Shop = () => {
   // get all the params of the URL
   const getParamsPartOfURL = () => {
     const currentURL = window.location.href;
-    console.log(currentURL);
     const urlParts = currentURL.split("/");
 
     let paramVar = "";
-    console.log(urlParts[3]);
     for (let i = 3; i < urlParts.length; i++) {
       paramVar += `${urlParts[i]}/`;
     }
     setLastParamInURL({ param: paramVar });
-    console.log(paramVar);
-    console.log(lastParamInURL);
   };
-  console.log("params", JSON.stringify(params, null, 2));
 
   useEffect(() => {
     async function fetchProducts() {
       try {
-        console.log("inside useEffect");
         setLoading(true);
         const res = await axios.get(`${baseURL}/products`);
         // console.log(res);
@@ -80,7 +74,6 @@ const Shop = () => {
       ) : (
         <></>
       )}
-      {console.log("hello\n")}
       {products.map((product) => {
         return (
           <div
@@ -89,7 +82,7 @@ const Shop = () => {
           >
             <Link to={`/products/${product._id}`}>
               <img
-                className="xl:h-80 lg:h-60 h-96 w-80 border-4 border-black "
+                className="product-image xl:h-80 lg:h-60 h-96 w-80 border-4 border-black "
                 src={product.image}
                 alt=""
               />

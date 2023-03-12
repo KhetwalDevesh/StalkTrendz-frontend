@@ -13,7 +13,6 @@ const Header = () => {
     totalItemsInCart,
     setTotalItemsInCart,
   } = useStore();
-  console.log(`header : ${cartItems}`);
   const countAllCartItems = () => {
     if (loginStatus == true) {
       cartQuantity = totalItemsInCart;
@@ -24,8 +23,6 @@ const Header = () => {
     }
   };
   countAllCartItems();
-  console.log(user.username);
-  console.log("totalItemsInCart", JSON.stringify(totalItemsInCart, null, 2));
 
   // handle Logout function
   const handleLogout = () => {
