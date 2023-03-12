@@ -30,7 +30,7 @@ const Login = () => {
         url: `${baseURL}/users/login`,
         data,
       });
-      console.log(loginResponse);
+      console.log("loginResponse", JSON.stringify(loginResponse, null, 2));
       if (loginResponse.statusText === "OK") {
         setLoginStatus({ currentStatus: true });
         setUser({ userData: loginResponse.data });
