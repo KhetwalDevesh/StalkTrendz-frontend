@@ -22,7 +22,7 @@ const Register = () => {
         url: `${baseURL}/users/register`,
         data,
       });
-      if (response.statusText === "Created") {
+      if (response.status === 201) {
         navigate("/login");
       }
     } catch (error) {
