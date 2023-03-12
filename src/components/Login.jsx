@@ -31,7 +31,7 @@ const Login = () => {
         data,
       });
       console.log("loginResponse", JSON.stringify(loginResponse, null, 2));
-      if (loginResponse.statusText === "OK") {
+      if (loginResponse.status === 200) {
         setLoginStatus({ currentStatus: true });
         setUser({ userData: loginResponse.data });
 
