@@ -27,7 +27,7 @@ const Login = () => {
       console.log("data", JSON.stringify(data, null, 2));
       const loginResponse = await axios({
         method: "post",
-        url: "http://localhost:8080/users/login",
+        url: `${baseURL}/users/login`,
         data,
       });
       console.log(loginResponse);

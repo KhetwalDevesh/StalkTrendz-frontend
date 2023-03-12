@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Login from "./Login";
 import useStore from "../store";
+import { baseURL } from "./Shop";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -19,7 +20,7 @@ const Register = () => {
       console.log("data", JSON.stringify(data, null, 2));
       const response = await axios({
         method: "post",
-        url: "http://localhost:8080/users/register",
+        url: `${baseURL}/users/register`,
         data,
       });
       console.log(response);
