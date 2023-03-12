@@ -4,9 +4,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import ProductDetails from "./ProductDetails";
-import productList from "../assets/products_and_images/products.js";
 import useStore from "../store";
-export const baseURL = "http://localhost:8080";
+export const baseURL = "https://stalktrendz-backend.onrender.com";
 
 // https://innocenti.onrender.com/products
 // http://localhost:8080/products
