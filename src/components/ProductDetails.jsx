@@ -97,14 +97,7 @@ const ProductDetails = () => {
 	if (productDetail === undefined)
 		return (
 			<div className="loading flex justify-center items-center w-screen h-screen bg-[#fff1e5]">
-				<ClipLoader
-					color={"black"}
-					loading={loading}
-					// cssOverride={override}
-					size={130}
-					aria-label="Loading Spinner"
-					data-testid="loader"
-				/>
+				<div className="circle-loader"></div>
 			</div>
 		);
 	return (
